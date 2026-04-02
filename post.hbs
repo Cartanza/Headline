@@ -1,7 +1,6 @@
-{{!< default}}
-
+{{#*inline "body"}}
 <main class="gh-main">
-    {{#post}}
+    {{#with post}}
         <article class="gh-article {{post_class}}">
 
             <header class="gh-article-header gh-canvas">
@@ -15,21 +14,23 @@
                     <p class="gh-article-excerpt">{{custom_excerpt}}</p>
                 {{/if}}
 
-                {{> "post-meta"}}
+                {{> partials/post-meta}}
 
-                {{> "feature-image"}}
+                {{> partials/feature-image}}
             </header>
 
             <section class="gh-content gh-canvas">
-                {{content}}
+                {{{content}}}
             </section>
 
         </article>
-    {{/post}}
+    {{/with}}
 
-    {{> "related-posts"}}
+    {{> partials/related-posts}}
 
-    {{#post}}
-        {{> "comments"}}
-    {{/post}}
+    {{#with post}}
+        {{> partials/comments}}
+    {{/with}}
 </main>
+{{/inline}}
+{{> default}}

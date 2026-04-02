@@ -3,11 +3,11 @@
 
         <div class="gh-author-image-list instapaper_ignore">
             {{#foreach authors}}
-                <a class="gh-author-image" href="{{url}}">
+                <a class="gh-author-image" href="/{{slug}}">
                     {{#if profile_image}}
                         <img src="{{profile_image}}" alt="{{name}}">
                     {{else}}
-                        <div class="gh-author-icon">{{> icons/avatar}}</div>
+                        <div class="gh-author-icon">{{> partials/icons/avatar}}</div>
                     {{/if}}
                 </a>
             {{/foreach}}
@@ -16,7 +16,7 @@
         <div class="gh-author-name-list">
             {{#foreach authors}}
                 <h4 class="gh-author-name">
-                    <a href="{{url}}">{{name}}</a>
+                    <a href="/{{slug}}">{{name}}</a>
                 </h4>
                 {{#unless @last}},&nbsp;{{/unless}}
             {{/foreach}}
@@ -24,7 +24,7 @@
 
         <div class="gh-article-meta">
             <div class="gh-article-meta-inner">
-                <time class="gh-article-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMM YYYY"}}</time>
+                <time class="gh-article-date" datetime="{{date published_at format="YYYY-MM-DD"}}">{{date published_at format="DD MMM YYYY"}}</time>
                 {{#if reading_time}}
                     <span class="gh-article-meta-sep"></span>
                     <span class="gh-article-length">{{reading_time minute="1 min" minutes="% min"}}</span>

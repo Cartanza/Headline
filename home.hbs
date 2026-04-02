@@ -1,11 +1,10 @@
-{{!< default}}
-
+{{#*inline "body"}}
 <main class="gh-main gh-outer">
     <div class="gh-inner">
         <section class="gh-topic gh-topic-grid">
             <h2 class="gh-topic-name">
                 {{#match pagination.pages ">" 1}}
-                    <a href="{{@site.url}}/page/2">Latest</a>
+                    <a href="{{@root.site.url}}/page/2">Latest</a>
                 {{else}}
                     Latest
                 {{/match}}
@@ -13,50 +12,50 @@
 
             <div class="gh-topic-content">
                 {{#foreach posts limit="7"}}
-                    {{> "loop-grid"}}
+                    {{> partials/loop-grid}}
                 {{/foreach}}
             </div>
 
             <footer class="gh-topic-footer">
                 {{#match pagination.pages ">" 1}}
-                    <a class="gh-topic-link" href="{{@site.url}}/page/2">Show more {{> "icons/arrow"}}</a>
+                    <a class="gh-topic-link" href="{{@root.site.url}}/page/2">Show more {{> partials/icons/arrow}}</a>
                 {{/match}}
             </footer>
         </section>
 
-        {{#if @custom.enter_tag_slugs_for_primary_sections}}
-            {{#get "tags" filter="slug:[{{@custom.enter_tag_slugs_for_primary_sections}}]"}}
+        {{#if @root.custom.enter_tag_slugs_for_primary_sections}}
+            {{#get "tags" filter="slug:[{{@root.custom.enter_tag_slugs_for_primary_sections}}]"}}
                 {{#foreach tags}}
-                    {{> "topic-grid"}}
+                    {{> partials/topic-grid}}
                 {{/foreach}}
             {{/get}}
         {{else}}
-            {{#match posts.length ">" 1}}
+            {{#match (length posts) ">" 1}}
                 {{#get "tags" include="count.posts" order="count.posts desc" limit="3"}}
                     {{#foreach tags}}
-                        {{> "topic-grid"}}
+                        {{> partials/topic-grid}}
                     {{/foreach}}
                 {{/get}}
             {{/match}}
         {{/if}}
 
-        {{#if @custom.enter_tag_slugs_for_secondary_sections}}
-            {{#get "tags" filter="slug:[{{@custom.enter_tag_slugs_for_secondary_sections}}]"}}
+        {{#if @root.custom.enter_tag_slugs_for_secondary_sections}}
+            {{#get "tags" filter="slug:[{{@root.custom.enter_tag_slugs_for_secondary_sections}}]"}}
                 {{#if tags}}
                     <div class="gh-topic-list">
                         {{#foreach tags}}
-                            {{> "topic-minimal"}}
+                            {{> partials/topic-minimal}}
                         {{/foreach}}
                     </div>
                 {{/if}}
             {{/get}}
         {{else}}
-            {{#match posts.length ">" 1}}
+            {{#match (length posts) ">" 1}}
                 {{#get "tags" include="count.posts" order="count.posts desc"}}
                     {{#if tags.[3]}}
                         <div class="gh-topic-list">
                             {{#foreach tags from="4" limit="3"}}
-                                {{> "topic-minimal"}}
+                                {{> partials/topic-minimal}}
                             {{/foreach}}
                         </div>
                     {{/if}}
@@ -65,3 +64,5 @@
         {{/if}}
     </div>
 </main>
+{{/inline}}
+{{> default}}

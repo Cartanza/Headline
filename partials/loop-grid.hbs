@@ -1,5 +1,5 @@
-<article class="gh-card {{post_class}}{{#match has_large_post "!=" false}}{{#has index="0"}} large{{/has}}{{/match}}">
-    <a class="gh-card-link" href="{{url}}">
+<article class="gh-card {{post_class}}{{#match has_large_post "!=" false}}{{#match index "0"}} large{{/match}}{{/match}}">
+    <a class="gh-card-link" href="/{{slug}}">
         {{#if feature_image}}
             <figure class="gh-card-image">
                 <img
@@ -22,9 +22,9 @@
 
             {{#if excerpt}}
                 {{#is "home"}}
-                    {{#has index="0"}}
+                    {{#match index "0"}}
                         <div class="gh-card-excerpt">{{excerpt}}</div>
-                    {{/has}}
+                    {{/match}}
                 {{else}}
                     <div class="gh-card-excerpt">{{excerpt}}</div>
                 {{/is}}
@@ -32,8 +32,8 @@
 
             <footer class="gh-card-footer">
                 <span class="gh-card-author">{{#foreach authors}}{{#if @first}}{{name}}{{else}}, {{name}}{{/if}}{{/foreach}}</span>
-                <time class="gh-card-date" datetime="{{date format="YYYY-MM-DD"}}">{{date format="DD MMM YYYY"}}</time>
-                {{#if @site.comments_enabled}}
+                <time class="gh-card-date" datetime="{{date published_at format="YYYY-MM-DD"}}">{{date published_at format="DD MMM YYYY"}}</time>
+                {{#if @root.site.comments_enabled}}
                     {{comment_count class="gh-card-comments"}}
                 {{/if}}
             </footer>

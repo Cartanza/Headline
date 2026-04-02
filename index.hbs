@@ -1,5 +1,4 @@
-{{!< default}}
-
+{{#*inline "body"}}
 <main class="gh-main gh-outer">
     <div class="gh-inner">
 
@@ -10,17 +9,19 @@
         <div class="gh-topic gh-topic-grid">
             <div class="gh-topic-content gh-feed">
                 {{#match pagination.page 2}}
-                    {{#get "posts" include="authors" limit=@config.posts_per_page as |recent|}}
+                    {{#get "posts" include="authors" limit=@root.config.posts_per_page as |recent|}}
                         {{#foreach recent}}
-                            {{> "loop-grid"}}
+                            {{> partials/loop-grid}}
                         {{/foreach}}
                     {{/get}}
                 {{/match}}
                 {{#foreach posts}}
-                    {{> "loop-grid" has_large_post=false}}
+                    {{> partials/loop-grid has_large_post=false}}
                 {{/foreach}}
             </div>
         </div>
 
     </div>
 </main>
+{{/inline}}
+{{> default}}
